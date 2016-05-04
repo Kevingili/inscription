@@ -70,7 +70,7 @@ public class RemplirBarreSaisie {
 		}
 	}
 	
-	public static void RemplirPersonne(Connection connection, JTable tableDesPersonnes, JTextField textFieldNomPersonne, JTextField textFieldPrenomPersonne, JTextField textFieldMailPersonne)
+	public static void RemplirPersonne(Connection connection, JTable tableDesPersonnes, JTextField textFieldNomPersonne, JTextField textFieldPrenomPersonne, JTextField textFieldMailPersonne, JTextField textFieldIdPersonne)
 	{
 		try
 		{
@@ -82,6 +82,7 @@ public class RemplirBarreSaisie {
 			
 			while(rs.next())
 			{
+				textFieldIdPersonne.setText(rs.getString("id_candP"));
 				textFieldNomPersonne.setText(rs.getString("nom"));
 				textFieldPrenomPersonne.setText(rs.getString("prenom"));
 				textFieldMailPersonne.setText(rs.getString("mail"));

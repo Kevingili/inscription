@@ -40,13 +40,14 @@ public class Vue {
 
 	Connection connection = null;
 	
-	private JTextField textFieldNomPersonne, textFieldPrenomPersonne, textFieldMailPersonne, textFieldIdEquipe, textFieldNomEquipe, textFieldIdComp, textFieldNomComp, textFieldDateComp;
+	private JTextField textFieldNomPersonne, textFieldPrenomPersonne, textFieldMailPersonne, textFieldIdEquipe, textFieldNomEquipe, textFieldIdComp, textFieldNomComp, textFieldIdPersonne, textFieldDateComp;
 	
 	private JTable tableDesPersonnes, tableEquipes, tableListeDesMembres, tableListeDesInscrits, tableCompetitions;
 	
 	private JList<String> listPersonne, listEquipe, listCandidat, listCompetition, listDesEquipes, listDesCompetitions;
 	
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
+	
 	private JRadioButton rdbtnOuiEquipe, rdbtnNonEquipe;
 
 
@@ -100,34 +101,43 @@ public class Vue {
 		tabbedPane_1.addTab("Personnes", null, panelPersonnes, null);
 		panelPersonnes.setLayout(null);
 		
+		JLabel lblIdPersonne = new JLabel("Id: ");
+		lblIdPersonne.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblIdPersonne.setBounds(10, 43, 46, 14);
+		panelPersonnes.add(lblIdPersonne);
 		
 		JLabel lblNom = new JLabel("Nom: ");
 		lblNom.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNom.setBounds(10, 53, 46, 14);
+		lblNom.setBounds(10, 74, 46, 14);
 		panelPersonnes.add(lblNom);
 		
 		JLabel lblPrnom = new JLabel("Pr\u00E9nom:");
 		lblPrnom.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPrnom.setBounds(10, 84, 75, 14);
+		lblPrnom.setBounds(10, 105, 75, 14);
 		panelPersonnes.add(lblPrnom);
 		
 		JLabel lblMail = new JLabel("Mail: ");
 		lblMail.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblMail.setBounds(10, 115, 46, 14);
+		lblMail.setBounds(10, 136, 46, 14);
 		panelPersonnes.add(lblMail);
 		
+		textFieldIdPersonne = new JTextField();
+		textFieldIdPersonne.setBounds(87, 42, 139, 20);
+		panelPersonnes.add(textFieldIdPersonne);
+		textFieldIdPersonne.setColumns(10);
+		
 		textFieldNomPersonne = new JTextField();
-		textFieldNomPersonne.setBounds(87, 52, 139, 20);
+		textFieldNomPersonne.setBounds(87, 73, 139, 20);
 		panelPersonnes.add(textFieldNomPersonne);
 		textFieldNomPersonne.setColumns(10);
 		
 		textFieldPrenomPersonne = new JTextField();
-		textFieldPrenomPersonne.setBounds(87, 83, 139, 20);
+		textFieldPrenomPersonne.setBounds(87, 104, 139, 20);
 		panelPersonnes.add(textFieldPrenomPersonne);
 		textFieldPrenomPersonne.setColumns(10);
 		
 		textFieldMailPersonne = new JTextField();
-		textFieldMailPersonne.setBounds(87, 114, 139, 20);
+		textFieldMailPersonne.setBounds(87, 135, 139, 20);
 		panelPersonnes.add(textFieldMailPersonne);
 		textFieldMailPersonne.setColumns(10);
 		
@@ -141,7 +151,7 @@ public class Vue {
 				
 			}
 		});
-		btnCreerPersonnes.setBounds(76, 171, 118, 23);
+		btnCreerPersonnes.setBounds(76, 198, 118, 23);
 		panelPersonnes.add(btnCreerPersonnes);
 		
 		JScrollPane scrollPaneDesPersonnes = new JScrollPane();
@@ -152,7 +162,7 @@ public class Vue {
 		tableDesPersonnes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				RemplirBarreSaisie.RemplirPersonne(connection, tableDesPersonnes, textFieldNomPersonne, textFieldPrenomPersonne, textFieldMailPersonne);
+				RemplirBarreSaisie.RemplirPersonne(connection, tableDesPersonnes, textFieldNomPersonne, textFieldPrenomPersonne, textFieldMailPersonne, textFieldIdPersonne);
 			}
 		});
 		scrollPaneDesPersonnes.setViewportView(tableDesPersonnes);
@@ -160,11 +170,11 @@ public class Vue {
 		JButton btnSupprimerPersonnes = new JButton("Supprimer");
 		btnSupprimerPersonnes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DeleteSQL.SupprimerUnePersonne(connection, textFieldNomPersonne);
+				DeleteSQL.SupprimerUnePersonne(connection, textFieldIdPersonne);
 				refreshTable.refreshTablePersonnes(tableDesPersonnes, connection);
 			}
 		});
-		btnSupprimerPersonnes.setBounds(76, 239, 118, 23);
+		btnSupprimerPersonnes.setBounds(76, 266, 118, 23);
 		panelPersonnes.add(btnSupprimerPersonnes);
 		
 		JButton btnModifierPersonnes = new JButton("Modifier");
@@ -175,7 +185,7 @@ public class Vue {
 				
 			}
 		});
-		btnModifierPersonnes.setBounds(76, 205, 118, 23);
+		btnModifierPersonnes.setBounds(76, 232, 118, 23);
 		panelPersonnes.add(btnModifierPersonnes);
 		
 		JPanel panelAppartenir = new JPanel();

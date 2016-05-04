@@ -124,14 +124,14 @@ public class DeleteSQL {
  		}
 	}
 	
-	public static void SupprimerUnePersonne(Connection connection, JTextField textFieldNomPersonne)
+	public static void SupprimerUnePersonne(Connection connection, JTextField textFieldIdPersonne)
 	{
 		int action = JOptionPane.showConfirmDialog(null, "Do you really want to delete?", "Delete", JOptionPane.YES_NO_OPTION);
 		if(action == 0)
 		{
 			try
 			{
-				String query = "delete from Personne where nom = '"+textFieldNomPersonne.getText()+"' ";
+				String query = "delete from candidat where id_cand = '"+textFieldIdPersonne.getText()+"' ";
 				PreparedStatement pst = connection.prepareStatement(query);
 				pst.execute();
 				JOptionPane.showMessageDialog(null, "Data deleted");
