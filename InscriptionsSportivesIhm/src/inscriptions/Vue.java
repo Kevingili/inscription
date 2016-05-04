@@ -2,12 +2,22 @@ package inscriptions;
 
 import java.awt.*;
 import net.proteanit.sql.DbUtils;
+import sql.ControleSaisie;
+import sql.DeleteSQL;
+import sql.LoadList;
+import sql.RemplirBarreSaisie;
+import sql.ShowTable;
+import sql.SqlConnection;
+import sql.refreshTable;
+
 import java.sql.*;
 import java.time.LocalDateTime;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.Font;
 import javax.swing.event.*;
+
+import metier.*;
 public class Vue {
 
 	private JFrame frame;
@@ -124,7 +134,9 @@ public class Vue {
 		JButton btnCreerPersonnes = new JButton("Cr\u00E9er");
 		btnCreerPersonnes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ControleSaisie.ControleSaisieCreerPersonne(connection, textFieldNomPersonne, textFieldPrenomPersonne, textFieldMailPersonne);
+				Inscriptions inscriptions = Inscriptions.getInscriptions();
+				Personne creerPersonne = inscriptions.createPersonne(textFieldPrenomPersonne.getText(), textFieldNomPersonne.getText(), textFieldMailPersonne.getText());
+				ControleSaisie.ControleSaisieCreerPersonne(connection, creerPersonne);
 				refreshTable.refreshTablePersonnes(tableDesPersonnes, connection);
 				
 			}

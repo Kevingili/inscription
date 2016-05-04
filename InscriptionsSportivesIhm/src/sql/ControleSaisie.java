@@ -1,4 +1,4 @@
-package inscriptions;
+package sql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,8 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+
+import metier.Personne;
 
 public class ControleSaisie {
 	Connection connection = null;
@@ -59,20 +61,20 @@ public class ControleSaisie {
 			JOptionPane.showMessageDialog(null, "Champ vide", "Erreur", JOptionPane.ERROR_MESSAGE);	
 	}
 	
-	public static void ControleSaisieCreerPersonne(Connection connection, JTextField textFieldNomPersonne, JTextField textFieldPrenomPersonne, JTextField textFieldMailPersonne)
+	public static void ControleSaisieCreerPersonne(Connection connection, Personne creerPersonne)
 	{
-		if (!textFieldNomPersonne.getText().isEmpty() && !textFieldPrenomPersonne.getText().isEmpty() && !textFieldMailPersonne.getText().isEmpty())
+		if (!creerPersonne.getNom().isEmpty() && !creerPersonne.getPrenom().isEmpty() && !creerPersonne.getMail().isEmpty())
 		{
 					try
 					{
-						String query = "SELECT * FROM personne WHERE nom = '"+textFieldNomPersonne.getText()+"' AND prenom ='"+textFieldPrenomPersonne.getText()+"'";
+						String query = "SELECT * FROM personne WHERE nom = '"+creerPersonne.getNom()+"' AND prenom ='"+creerPersonne.getPrenom()+"'";
 						PreparedStatement pst = connection.prepareStatement(query);
 						ResultSet rs = pst.executeQuery();	
 						
 						if(rs.next())
 							JOptionPane.showMessageDialog(null, "Cette personne existe déjà");
 						else
-							InsertSQL.CreerUnePersonne(connection, textFieldNomPersonne, textFieldPrenomPersonne, textFieldMailPersonne);
+							InsertSQL.CreerUnePersonne(connection, creerPersonne);
 					}
 					catch (Exception e)
 					{

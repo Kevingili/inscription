@@ -1,4 +1,4 @@
-package inscriptions;
+package sql;
 
 import java.sql.*;
 import javax.swing.*;

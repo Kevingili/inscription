@@ -1,4 +1,4 @@
-package inscriptions;
+package sql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,9 +10,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import metier.Personne;
+
 public class InsertSQL {
 	Connection connection = null;
-	public static void CreerUnePersonne(Connection connection, JTextField textFieldNomPersonne, JTextField textFieldPrenomPersonne, JTextField textFieldMailPersonne)
+	public static void CreerUnePersonne(Connection connection, Personne creerPersonne)
 	{
 		try
 		{
@@ -33,9 +35,9 @@ public class InsertSQL {
 			String query1 = "insert into Personne (id_candP, nom, prenom, mail) values (?, ?, ?, ?)";
 			PreparedStatement pst1 = connection.prepareStatement(query1);
 			pst1.setInt(1, id);
-			pst1.setString(2, textFieldNomPersonne.getText());
-			pst1.setString(3, textFieldPrenomPersonne.getText());
-			pst1.setString(4, textFieldMailPersonne.getText());
+			pst1.setString(2, creerPersonne.getNom());
+			pst1.setString(3, creerPersonne.getPrenom());
+			pst1.setString(4, creerPersonne.getMail());
 			pst1.execute();
 			JOptionPane.showMessageDialog(null, "Data Saved");
 			pst1.close();
