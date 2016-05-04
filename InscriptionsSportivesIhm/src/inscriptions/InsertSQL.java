@@ -112,34 +112,45 @@ public class InsertSQL {
 		{
 			int n = 0;
 			int n4= 0;
-				String query = "SELECT id_candP FROM personne WHERE prenom = '"+ row +"'";
+			boolean valeur = false;
+			boolean valeur2 = false;
+				String query = "SELECT * FROM personne WHERE prenom = '"+ row +"'";
 				PreparedStatement pst = connection.prepareStatement(query);
 				ResultSet idcand = pst.executeQuery();
 				if(idcand.next())
 				{
 					n = idcand.getInt("id_candP");
+					valeur = true;
 				}
 				else
 				{
 					
-					String query2 = "SELECT id_candE FROM equipe WHERE nom = '"+ row +"'";
+					String query2 = "SELECT * FROM equipe WHERE nom = '"+ row +"'";
 					PreparedStatement pst1 = connection.prepareStatement(query2);
 					ResultSet idcand2 = pst1.executeQuery();
 					idcand2.next();
 					n = idcand2.getInt("id_candE");
 				}
-				String query3 = "SELECT id_comp FROM competition WHERE nom = '"+ row1 +"'";
+				String query3 = "SELECT * FROM competition WHERE nom = '"+ row1 +"'";
 				PreparedStatement pst2 = connection.prepareStatement(query3);
 				ResultSet idcand3 = pst2.executeQuery();
 				idcand3.next();
 				n4 = idcand3.getInt("id_comp");
+				valeur2 = idcand3.getBoolean("enEquipe");
 				
+				if(valeur == true && valeur2 == false || valeur == false && valeur2 == true)
+				{
 				String query1 = "INSERT INTO inscrire(id_cand, id_comp) VALUES ('"+ n + "', '"+n4+"')";
 				Statement s = connection.createStatement();
 				s.executeUpdate(query1);
 				pst.close();
 				s.close();
 				JOptionPane.showMessageDialog(null, "Data Saved");
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Le candidat ne correspond pas à la compétition");
+				}
 		}
 		catch(Exception erty)
 		{
