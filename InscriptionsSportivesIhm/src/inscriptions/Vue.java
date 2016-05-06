@@ -145,7 +145,7 @@ public class Vue {
 		btnCreerPersonnes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Inscriptions inscriptions = Inscriptions.getInscriptions();
-				Personne creerPersonne = inscriptions.createPersonne(textFieldPrenomPersonne.getText(), textFieldNomPersonne.getText(), textFieldMailPersonne.getText());
+				Personne creerPersonne = inscriptions.createPersonne(textFieldNomPersonne.getText(), textFieldPrenomPersonne.getText(), textFieldMailPersonne.getText());
 				ControleSaisie.ControleSaisieCreerPersonne(connection, creerPersonne);
 				refreshTable.refreshTablePersonnes(tableDesPersonnes, connection);
 				

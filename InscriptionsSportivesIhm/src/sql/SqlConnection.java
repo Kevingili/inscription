@@ -8,7 +8,7 @@ public class SqlConnection {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			//192.168.60.248 -- mot de passe: root
-			Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.60.248/inscription", "root", "root");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/inscription", "root", "");
 			JOptionPane.showMessageDialog(null, "Connection successful");
 			return conn;
 		} catch(Exception e)
