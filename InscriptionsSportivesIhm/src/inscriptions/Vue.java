@@ -144,6 +144,7 @@ public class Vue {
 		JButton btnCreerPersonnes = new JButton("Cr\u00E9er");
 		btnCreerPersonnes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//Ajout d'une personne
 				Inscriptions inscriptions = Inscriptions.getInscriptions();
 				Personne creerPersonne = inscriptions.createPersonne(textFieldNomPersonne.getText(), textFieldPrenomPersonne.getText(), textFieldMailPersonne.getText());
 				ControleSaisie.ControleSaisieCreerPersonne(connection, creerPersonne);
