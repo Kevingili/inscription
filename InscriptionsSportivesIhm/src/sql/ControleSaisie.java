@@ -85,20 +85,20 @@ public class ControleSaisie {
 			JOptionPane.showMessageDialog(null, "Champ vide", "Erreur", JOptionPane.ERROR_MESSAGE);	
 	}
 	
-	public static void ControleSaisieModifierPersonne(Connection connection, JTextField textFieldNomPersonne, JTextField textFieldPrenomPersonne, JTextField textFieldMailPersonne)
+	public static void ControleSaisieModifierPersonne(Connection connection, Personne modifierPersonne)
 	{
-		if (!textFieldNomPersonne.getText().isEmpty() && !textFieldPrenomPersonne.getText().isEmpty() && !textFieldMailPersonne.getText().isEmpty())
+		if (!modifierPersonne.getNom().isEmpty() && !modifierPersonne.getPrenom().isEmpty() && !modifierPersonne.getMail().isEmpty())
 		{
 					try
 					{
-						String query = "SELECT * FROM personne WHERE nom = '"+textFieldNomPersonne.getText()+"' AND prenom ='"+textFieldPrenomPersonne.getText()+"' AND mail = '"+textFieldMailPersonne.getText()+"'";
+						String query = "SELECT * FROM personne WHERE nom = '"+modifierPersonne.getNom()+"' AND prenom ='"+modifierPersonne.getPrenom()+"' AND mail = '"+modifierPersonne.getMail()+"'";
 						PreparedStatement pst = connection.prepareStatement(query);
 						ResultSet rs = pst.executeQuery();	
 						
 						if(rs.next())
 							JOptionPane.showMessageDialog(null, "Aucune information modifié");
 						else
-							UpdateSQL.ModifierUnePersonne(connection, textFieldMailPersonne, textFieldNomPersonne);
+							UpdateSQL.ModifierUnePersonne(connection, modifierPersonne);
 					}
 					catch (Exception e)
 					{

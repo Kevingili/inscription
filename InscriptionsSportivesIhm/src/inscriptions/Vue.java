@@ -181,7 +181,9 @@ public class Vue {
 		JButton btnModifierPersonnes = new JButton("Modifier");
 		btnModifierPersonnes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ControleSaisie.ControleSaisieModifierPersonne(connection, textFieldNomPersonne, textFieldPrenomPersonne, textFieldMailPersonne);
+				Inscriptions inscriptions = Inscriptions.getInscriptions();
+				Personne modifierPersonne = inscriptions.createPersonne(textFieldNomPersonne.getText(), textFieldPrenomPersonne.getText(), textFieldMailPersonne.getText());
+				ControleSaisie.ControleSaisieModifierPersonne(connection, modifierPersonne);
 				refreshTable.refreshTablePersonnes(tableDesPersonnes, connection);
 				
 			}

@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import metier.Personne;
+
 public class UpdateSQL {
 	Connection connection = null;
 	public static void ModifierUneCompetition(Connection connection, JTextField textFieldNomComp, JTextField textFieldDateComp, JTextField textFieldIdComp)
@@ -40,11 +42,11 @@ public class UpdateSQL {
 		}
 	}
 	
-	public static void ModifierUnePersonne(Connection connection, JTextField textFieldMailPersonne, JTextField textFieldNomPersonne)
+	public static void ModifierUnePersonne(Connection connection, Personne modifierPersonne)
 	{
 		try
 		{
-			String query = "Update Personne set mail = '"+textFieldMailPersonne.getText()+"' where nom ='"+textFieldNomPersonne.getText()+"'";
+			String query = "Update Personne set mail = '"+modifierPersonne.getMail()+"' where nom ='"+modifierPersonne.getNom()+"'";
 			PreparedStatement pst = connection.prepareStatement(query);
 			pst.execute();
 			JOptionPane.showMessageDialog(null, "Data Updated");
