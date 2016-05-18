@@ -90,7 +90,8 @@ public class Vue {
 		JPanel panelPersonnes = new JPanel();
 		panelPersonnes.addAncestorListener(new AncestorListener() {
 			public void ancestorAdded(AncestorEvent arg0) {
-				ShowTable.AfficherTablePersonne(tableDesPersonnes, connection);
+				String query = "select nom, prenom, mail from personne";
+				ShowTable.AfficherTable(tableDesPersonnes, connection, query);
 			}
 			public void ancestorMoved(AncestorEvent arg0) {
 				
@@ -261,7 +262,8 @@ public class Vue {
 		JPanel panelEquipes = new JPanel();
 		panelEquipes.addAncestorListener(new AncestorListener() {
 			public void ancestorAdded(AncestorEvent arg0) {
-				ShowTable.AfficherTableEquipes(tableEquipes, connection);
+				String query = "select id_candE, nom from equipe";
+				ShowTable.AfficherTable(tableEquipes, connection, query);
 			}
 			public void ancestorMoved(AncestorEvent arg0) {
 				
@@ -383,7 +385,8 @@ public class Vue {
 		JPanel panelCompetitions = new JPanel();
 		panelCompetitions.addAncestorListener(new AncestorListener() {
 			public void ancestorAdded(AncestorEvent event) {
-				ShowTable.AfficherTableCompetitions(tableCompetitions, connection);
+				String query = "select * from competition";
+				ShowTable.AfficherTable(tableCompetitions, connection, query);
 			}
 			public void ancestorMoved(AncestorEvent event) {
 			}

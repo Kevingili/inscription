@@ -10,50 +10,13 @@ import net.proteanit.sql.DbUtils;
 
 public class ShowTable {
 	Connection connection = null;
-	public static void AfficherTablePersonne(JTable tableDesPersonnes, Connection connection)
+	public static void AfficherTable(JTable table, Connection connection, String query)
 	{
 		try
 		{
-			String query = "select nom, prenom, mail from personne";
 			PreparedStatement pst = connection.prepareStatement(query);
 			ResultSet rs = pst.executeQuery();
-			tableDesPersonnes.setModel(DbUtils.resultSetToTableModel(rs));
-			rs.close();
-			pst.close();
-			
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
-	public static void AfficherTableCompetitions(JTable tableCompetitions, Connection connection)
-	{
-		try
-		{
-			String query = "select * from competition";
-			PreparedStatement pst = connection.prepareStatement(query);
-			ResultSet rs = pst.executeQuery();
-			tableCompetitions.setModel(DbUtils.resultSetToTableModel(rs));
-			rs.close();
-			pst.close();
-			
-		}
-		catch(Exception ek)
-		{
-			ek.printStackTrace();
-		}
-	}
-
-	public static void AfficherTableEquipes(JTable tableEquipes, Connection connection)
-	{
-		try
-		{
-			String query = "select id_candE, nom from equipe";
-			PreparedStatement pst = connection.prepareStatement(query);
-			ResultSet rs = pst.executeQuery();
-			tableEquipes.setModel(DbUtils.resultSetToTableModel(rs));
+			table.setModel(DbUtils.resultSetToTableModel(rs));
 			rs.close();
 			pst.close();
 			
